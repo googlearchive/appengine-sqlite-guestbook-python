@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+  <body>
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+    <a href="/">Select a server</a>
+    <h2>App Engine SQLite3 Guestbook</h2>
+    <form action="/sign" method="post">
+      <textarea name="content" rows="3" cols="60"></textarea>
+      <input type="submit" value="Sign Guestbook">
+    </form>
+    {% for greeting in greetings %}
+    <div class="row">
+      {% if greeting["name"] %}
+      <b>{{ greeting["name"] }}</b> wrote:
+      {% else %}
+      An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting["content"] }}</blockquote>
+    </div>
+    {% endfor %}
+  </body>
+</html>
+{% endautoescape %}

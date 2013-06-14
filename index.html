@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+  <body>
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+    <h2>App Engine SQLite3 Guestbook</h2>
+    <p>Available servers</p>
+    <ul>
+    {% for server in servers %}
+    <li><a href="{{server[1]}}">Server {{ server[0] }}</a></li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
+{% endautoescape %}
