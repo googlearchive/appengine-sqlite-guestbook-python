@@ -4,7 +4,9 @@ Another guestbook sample with VM Runtime and Python sqlite3 library.
 
 ## Project Setup, Installation, and Configuration
 
-You can run this application only on the [App Engine VM Runtime](https://docs.google.com/a/google.com/document/d/1VH1oVarfKILAF_TfvETtPPE3TFzIuWqsa22PtkRkgJ4/edit#heading=h.bp3qf0in6s7i). Now the VM Runtime is under Trusted Tester Program, and only the testers are able to run this application.
+You can run this application only on the [App Engine VM
+Runtime][1]. Now the VM Runtime is under Trusted Tester Program, and
+only the testers are able to run this application.
 
 ## Deploying
 
@@ -14,7 +16,7 @@ You can run this application only on the [App Engine VM Runtime](https://docs.go
    `your-app-id` to the app-id which is whitelisted for the VM Runtime
    Trusted Tester Program.
 3. Run the following command:
-   $ /CUSTOM_SDK_DIR/appcfg.py update <directory>
+   $ /$CUSTOM_SDK_DIR/appcfg.py -R update <directory>
 
 ## Contributing changes
 
@@ -23,3 +25,5 @@ You can run this application only on the [App Engine VM Runtime](https://docs.go
 ## Licensing
 
 * See LICENSE
+
+[1]: https://docs.google.com/a/google.com/document/d/1VH1oVarfKILAF_TfvETtPPE3TFzIuWqsa22PtkRkgJ4/edit
