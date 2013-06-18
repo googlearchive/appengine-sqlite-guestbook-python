@@ -18,9 +18,9 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 DB_FILENAME = os.path.join('/tmp', 'guestbook.sqlite')
 
-CREATE_TABLE_SQL = """CREATE TABLE IF NOT EXISTS guestbook
-                      (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR,
-                      content VARCHAR)"""
+CREATE_TABLE_SQL = """\
+CREATE TABLE IF NOT EXISTS guestbook
+(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, content VARCHAR)"""
 
 SELECT_SQL = 'SELECT * FROM guestbook ORDER BY id DESC LIMIT {}'
 
@@ -28,13 +28,14 @@ INSERT_SQL = 'INSERT INTO guestbook (name, content) VALUES (?, ?)'
 
 POST_PER_PAGE = 20
 
+
 def get_connection():
     """A function to get sqlite connection.
 
     Returns:
         An sqlite connection object.
     """
-    logging.info('Opened a sqlite db at {}.'.format(DB_FILENAME))
+    logging.info('Opening a sqlite db.')
     return sqlite3.connect(DB_FILENAME)
 
 def get_url_for_instance(instance_id):
@@ -71,7 +72,7 @@ def get_signin_navigation(original_url):
 class ActiveServer(ndb.Model):
     """A model to store active servers.
 
-    We use the instance id as the key name, and there's no any property.
+    We use the instance id as the key name, and there's not any properties.
     """
 
     @classmethod

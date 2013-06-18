@@ -16,7 +16,7 @@ only the testers are able to run this application.
    `your-app-id` to the app-id which is whitelisted for the VM Runtime
    Trusted Tester Program.
 3. Run the following command:
-   $ /$CUSTOM_SDK_DIR/appcfg.py -R update <directory>
+   $ $CUSTOM_SDK_DIR/appcfg.py -R update <directory>
 
 ## Contributing changes
 
@@ -26,4 +26,4 @@ only the testers are able to run this application.
 
 * See LICENSE
 
-[1]: https://docs.google.com/a/google.com/document/d/1VH1oVarfKILAF_TfvETtPPE3TFzIuWqsa22PtkRkgJ4/edit
+[1]: https://docs.google.com/document/d/1VH1oVarfKILAF_TfvETtPPE3TFzIuWqsa22PtkRkgJ4
