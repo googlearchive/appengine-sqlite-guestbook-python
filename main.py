@@ -169,12 +169,12 @@ class Stop(webapp2.RequestHandler):
     def get(self):
         """Just call shutdown_hook now for a temporary workaround.
 
-        With the initial version of the vm runtime, a call to
+        With the initial version of the VM Runtime, a call to
         /_ah/stop hits this handler, without invoking the shutdown
         hook we registered in the start handler. We're working on the
         fix to make it a consistent behavior same as the traditional
         App Engine backends. After the fix is out, this stop handler
-        won't necessary any more.
+        won't be necessary any more.
         """
         shutdown_hook()
 
