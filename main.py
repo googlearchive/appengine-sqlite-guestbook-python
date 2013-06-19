@@ -9,6 +9,7 @@ import webapp2
 
 from google.appengine.api import app_identity
 from google.appengine.api import modules
+from google.appengine.api import runtime
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -28,6 +29,13 @@ INSERT_SQL = 'INSERT INTO guestbook (name, content) VALUES (?, ?)'
 
 POST_PER_PAGE = 20
 
+
+def shutdown_hook():
+    """A hook function for de-registering myself."""
+    logging.info('shutdown_hook called.')
+    instance_id = modules.get_current_instance_id()
+    ndb.transaction(
+        lambda: ActiveServer.get_instance_key(instance_id).delete())
 
 def get_connection():
     """A function to get sqlite connection.
@@ -58,7 +66,7 @@ def get_signin_navigation(original_url):
         An original URL.
 
     Returns:
-        Two values; a url and a link text.
+        Two value tuple; a url and a link text.
     """
     if users.get_current_user():
         url = users.create_logout_url(original_url)
@@ -72,7 +80,7 @@ def get_signin_navigation(original_url):
 class ActiveServer(ndb.Model):
     """A model to store active servers.
 
-    We use the instance id as the key name, and there's not any properties.
+    We use the instance id as the key name, and there are no properties.
     """
 
     @classmethod
@@ -143,6 +151,7 @@ class Start(webapp2.RequestHandler):
 
     def get(self):
         """A handler for /_ah/start, registering myself."""
+        runtime.set_shutdown_hook(shutdown_hook)
         con = get_connection()
         with con:
             con.execute(CREATE_TABLE_SQL)
@@ -155,10 +164,8 @@ class Stop(webapp2.RequestHandler):
     """A handler for /_ah/stop."""
 
     def get(self):
-        """A handler for /_ah/stop, de-registering myself."""
-        instance_id = modules.get_current_instance_id()
-        ndb.transaction(
-            lambda: ActiveServer.get_instance_key(instance_id).delete())
+        """Just call shutdown_hook for now."""
+        shutdown_hook()
 
 
 APPLICATION = webapp2.WSGIApplication([
