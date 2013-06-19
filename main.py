@@ -37,6 +37,7 @@ def shutdown_hook():
     ndb.transaction(
         lambda: ActiveServer.get_instance_key(instance_id).delete())
 
+
 def get_connection():
     """A function to get sqlite connection.
 
@@ -45,6 +46,7 @@ def get_connection():
     """
     logging.info('Opening a sqlite db.')
     return sqlite3.connect(DB_FILENAME)
+
 
 def get_url_for_instance(instance_id):
     """Return a full url of the guestbook running on a particular instance.
@@ -58,6 +60,7 @@ def get_url_for_instance(instance_id):
     hostname = app_identity.get_default_version_hostname()
     return 'https://{}-dot-{}-dot-{}/guestbook'.format(
         instance_id, modules.get_current_version_name(), hostname)
+
 
 def get_signin_navigation(original_url):
     """Return a pair of a link text and a link for sign in/out operation.
@@ -164,7 +167,15 @@ class Stop(webapp2.RequestHandler):
     """A handler for /_ah/stop."""
 
     def get(self):
-        """Just call shutdown_hook for now."""
+        """Just call shutdown_hook now for a temporary workaround.
+
+        With the initial version of the vm runtime, a call to
+        /_ah/stop hits this handler, without invoking the shutdown
+        hook we registered in the start handler. We're working on the
+        fix to make it a consistent behavior same as the traditional
+        App Engine backends. After the fix is out, this stop handler
+        won't necessary any more.
+        """
         shutdown_hook()
 
 
