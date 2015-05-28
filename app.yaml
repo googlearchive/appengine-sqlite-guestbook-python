@@ -1,6 +1,4 @@
 # Demo app.
-application: your-app-id
-version: 1
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -8,9 +6,6 @@ vm: true
 
 manual_scaling:
   instances: 2
-
-vm_settings:
-  machine_type: n1-standard-1  # == Default
 
 handlers:
 
