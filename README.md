@@ -1,3 +1,7 @@
+![status: inactive](https://img.shields.io/badge/status-inactive-red.svg)
+
+**This repository is deprecated and no longer maintained.**
+
 Copyright (C) 2010-2014 Google Inc.
 ## appengine-sqlite-guestbook-python
 
